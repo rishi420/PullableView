@@ -58,7 +58,6 @@
     pullUpView.delegate = self;
     
     [self.view addSubview:pullUpView];
-    [pullUpView release];
     
     pullUpLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 4, 320, 20)];
     pullUpLabel.textAlignment = UITextAlignmentCenter;
@@ -67,7 +66,6 @@
     pullUpLabel.text = @"Pull me up!";
     
     [pullUpView addSubview:pullUpLabel];
-    [pullUpLabel release];
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 80, 320, 64)];
     label.textAlignment = UITextAlignmentCenter;
@@ -78,7 +76,6 @@
     label.text = @"I only go half-way up!";
     
     [pullUpView addSubview:label];
-    [label release];
     
     pullDownView = [[StyledPullableView alloc] initWithFrame:CGRectMake(xOffset, 0, 320, PULL_DOWN_VIEW_HEIGHT)];
     pullDownView.openedCenter = CGPointMake(160 + xOffset, PULL_DOWN_VIEW_HEIGHT / 2);
@@ -86,7 +83,6 @@
     pullDownView.center = pullDownView.closedCenter;
     
     [self.view addSubview:pullDownView];
-    [pullDownView release];
     
     label = [[UILabel alloc] initWithFrame:CGRectMake(0, 200, 320, 64)];
     label.textAlignment = UITextAlignmentCenter;
@@ -97,7 +93,6 @@
     label.text = @"Look at this beautiful linen texture!";
     
     [pullDownView addSubview:label];
-    [label release];
 }
 
 
