@@ -8,7 +8,10 @@
 #define PUlL_UP_VIEW_HEIGHT     400
 #define PULL_DOWN_VIEW_HEIGHT   300
 
-@implementation ViewController
+
+@implementation ViewController {
+    BOOL _isPullable;
+}
 
 - (void)viewDidLoad
 {
@@ -81,7 +84,7 @@
     pullDownView.openedCenter = CGPointMake(160 + xOffset, PULL_DOWN_VIEW_HEIGHT / 2);
     pullDownView.closedCenter = CGPointMake(160 + xOffset, - PULL_DOWN_VIEW_HEIGHT / 2 + 30);
     pullDownView.center = pullDownView.closedCenter;
-    
+    pullDownView.delegate = self;
     [self.view addSubview:pullDownView];
     
     label = [[UILabel alloc] initWithFrame:CGRectMake(0, 200, 320, 64)];
@@ -101,6 +104,13 @@
     return UIInterfaceOrientationIsPortrait(interfaceOrientation);
 }
 
+#pragma mark PullableViewDelegate
+
+- (BOOL)pullableView:(PullableView *)pView shouldReceiveTouch:(UITouch *)touch
+{
+    return _isPullable;
+}
+
 - (void)pullableView:(PullableView *)pView didChangeState:(BOOL)opened {
     if (opened) {
         pullUpLabel.text = @"Now I'm open!";
@@ -109,4 +119,10 @@
     }
 }
 
+
+
+- (IBAction)actionStartStopButton:(id)sender {
+    [sender setSelected:![sender isSelected]];
+    _isPullable = [sender isSelected];
+}
 @end

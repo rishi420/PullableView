@@ -15,5 +15,6 @@
     
     PullableView *pullRightView;
 }
+- (IBAction)actionStartStopButton:(id)sender;
 
 @end

@@ -16,6 +16,9 @@
  */
 - (void)pullableView:(PullableView *)pView didChangeState:(BOOL)opened;
 
+@optional
+- (BOOL)pullableView:(PullableView *)pView shouldReceiveTouch:(UITouch *)touch;
+
 @end
 
 /**
@@ -27,7 +30,7 @@
  vertical axis, or the horizontal axis otherwise.
  @author Fabio Rodella fabio@crocodella.com.br
  */
-@interface PullableView : UIView {
+@interface PullableView : UIView <UIGestureRecognizerDelegate> {
     
     CGPoint closedCenter;
     CGPoint openedCenter;

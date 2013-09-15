@@ -34,15 +34,18 @@
         dragRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleDrag:)];
         dragRecognizer.minimumNumberOfTouches = 1;
         dragRecognizer.maximumNumberOfTouches = 1;
+        dragRecognizer.delegate = self;
         
         [handleView addGestureRecognizer:dragRecognizer];
         
         tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
         tapRecognizer.numberOfTapsRequired = 1;
         tapRecognizer.numberOfTouchesRequired = 1;
+        tapRecognizer.delegate = self;
         
         [handleView addGestureRecognizer:tapRecognizer];
-        
+        handleView.backgroundColor = [UIColor redColor];
+        [self bringSubviewToFront:handleView];
         opened = NO;
     }
     return self;
@@ -175,6 +178,15 @@
             [delegate pullableView:self didChangeState:opened];
         }
     }
+}
+
+#pragma mark - UIGestureRecognizerDelegate
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    if ([delegate respondsToSelector:@selector(pullableView:shouldReceiveTouch:)]) {
+        return [delegate pullableView:self shouldReceiveTouch:touch];
+    }
+    return YES;
 }
 
 @end
